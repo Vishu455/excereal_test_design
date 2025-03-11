@@ -1,21 +1,23 @@
 "use client";
-import { AppBar, Toolbar, Typography, IconButton, InputBase, Divider, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, IconButton, InputBase, Divider, Button, Box, useMediaQuery } from "@mui/material";
 import { Search, Notifications, FilterList, Menu as MenuIcon } from "@mui/icons-material";
-import { styled, useMediaQuery } from "@mui/system";
+import { styled } from "@mui/system";
 
-
-const SearchBar = styled("div")({
+const SearchBar = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  backgroundColor: "#f1f1f1",
-  padding: "5px 10px",
-  borderRadius: "20px",
-  width: "180px",
-});
+  backgroundColor: "#e0e0e0",
+  padding: "8px 15px",
+  borderRadius: "25px",
+  width: "260px", 
+  maxWidth: "100%",
+  flexGrow: 1, 
+}));
 
 const NotificationIcon = styled(Box)({
   position: "relative",
   display: "inline-block",
+  color:"#e0e0e0"
 });
 
 const NotificationDot = styled(Box)({
@@ -33,31 +35,30 @@ const Topbar = ({ onMenuClick }: { onMenuClick: any }) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-    
-      <AppBar position="static" color="default" elevation={0}>
-        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#ffffff", boxShadow: "none", px: 2 }}>
+        <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 70 }}>
+          
           
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            
             <IconButton onClick={onMenuClick} sx={{ display: { md: "none" } }}>
               <MenuIcon />
             </IconButton>
-            
             <Box>
-              <Typography variant="body1">Park Centre ▼</Typography>
+              <Typography variant="body1" fontWeight="bold"sx={{color:"black"}}>Park Centre ▼</Typography>
               <Typography variant="caption" color="text.secondary">
                 Park Centre, Technopark Campus...
               </Typography>
             </Box>
           </Box>
 
-          
-          <SearchBar>
-            <Search color="action" />
-            <InputBase placeholder="Search…" sx={{ marginLeft: 1, width: "100%" }} />
-          </SearchBar>
-
-          
+         
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center", minWidth: 200 }}>
+            <SearchBar sx={{ maxWidth: isMobile ? "200px" : "300px" }}> 
+              <Search color="action" />
+              <InputBase placeholder="Search…" sx={{ marginLeft: 1, flex: 1 }} />
+            </SearchBar>
+          </Box>
+ 
           <NotificationIcon>
             <IconButton color="inherit">
               <Notifications />
@@ -67,9 +68,9 @@ const Topbar = ({ onMenuClick }: { onMenuClick: any }) => {
         </Toolbar>
       </AppBar>
 
-       <Divider />
+      <Divider />
 
-      <Box sx={{ padding: "6px 8px", display: "flex", gap: 1.5, flexWrap: "wrap" }}>
+      <Box sx={{ padding: "8px 12px", display: "flex", gap: 1.5, flexWrap: "wrap" }}>
         <Button startIcon={<FilterList />} variant="outlined" sx={{ borderRadius: "15px", px: 2, fontSize: "0.75rem", textTransform: "none" }}>
           Filter
         </Button>
@@ -77,7 +78,7 @@ const Topbar = ({ onMenuClick }: { onMenuClick: any }) => {
           Category
         </Button>
         <Button variant="outlined" sx={{ borderRadius: "15px", px: 2, fontSize: "0.75rem", textTransform: "none" }}>
-          CATEGORY
+        Category
         </Button>
         <Button variant="outlined" sx={{ borderRadius: "15px", px: 2, fontSize: "0.75rem", textTransform: "none" }}>
           Category
@@ -89,6 +90,7 @@ const Topbar = ({ onMenuClick }: { onMenuClick: any }) => {
           More...
         </Button>
       </Box>
+
       <Divider />
     </Box>
   );

@@ -24,6 +24,7 @@ const MainPage = () => {
             top: 0,
             left: isMobile ? 0 : 280,
             zIndex: 1000,
+            fontSize:isMobile ? "0.2rem":"0.75rem",
             background: "#fff",
             borderBottom: "1px solid #ddd",
           }}
